@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  background-color: #08090B;
+  color: #F6F3EA;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  background:
+    radial-gradient(1000px 540px at 50% -10%, rgba(109, 139, 93, 0.08), transparent 60%),
+    radial-gradient(800px 420px at 90% 110%, rgba(212, 184, 150, 0.05), transparent 60%),
+    #08090B;
+}
+
+::selection {
+  background: rgba(212, 184, 150, 0.3);
+  color: #F6F3EA;
+}
+
+@layer components {
+  .surface {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(0, 0, 0, 0.0) 100%),
+      rgba(21, 24, 28, 0.72);
+    border: 1px solid rgba(214, 205, 185, 0.08);
+    backdrop-filter: blur(6px);
+  }
+  .surface-hover {
+    transition: border-color 200ms ease, background-color 200ms ease, transform 200ms ease;
+  }
+  .surface-hover:hover {
+    border-color: rgba(214, 205, 185, 0.18);
+  }
+  .hairline {
+    border-color: rgba(214, 205, 185, 0.08);
+  }
+  .label-mono {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #8B8670;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.2rem 0.55rem;
+    border: 1px solid rgba(214, 205, 185, 0.14);
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: 0.02em;
+    color: #D8D2BE;
+    background: rgba(21, 24, 28, 0.6);
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.55rem 0.95rem;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #0C0E10;
+    background: #D8D2BE;
+    transition: background 180ms ease, transform 180ms ease;
+  }
+  .btn-primary:hover {
+    background: #F6F3EA;
+  }
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.55rem 0.95rem;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #EDE9DD;
+    border: 1px solid rgba(214, 205, 185, 0.16);
+    background: rgba(21, 24, 28, 0.5);
+    transition: border-color 180ms ease, background 180ms ease;
+  }
+  .btn-ghost:hover {
+    border-color: rgba(214, 205, 185, 0.28);
+    background: rgba(29, 33, 38, 0.7);
+  }
+  .link-subtle {
+    color: #D8D2BE;
+    transition: color 180ms ease;
+  }
+  .link-subtle:hover {
+    color: #F6F3EA;
+  }
+}
