@@ -9,30 +9,30 @@ const SCENE_SPRING = { stiffness: 80, damping: 22, mass: 1 };
 const Z_SPREAD = 42;
 const SIGMA = 2.8;
 
-const PANEL_IMAGES = [
-  "https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=600&q=80", // driver close-up
-  "https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?w=600&q=80", // putter on green
-  "https://images.unsplash.com/photo-1592919505780-303950717480?w=600&q=80", // golf ball / club
-  "https://images.unsplash.com/photo-1535132011086-b8818f016104?w=600&q=80", // bag
-  "https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=600&q=80", // irons
-  "https://images.unsplash.com/photo-1622396481328-9b1b78cdd9fd?w=600&q=80", // wedge
-  "https://images.unsplash.com/photo-1552346154-21d32810aba3?w=600&q=80", // shoes
-  "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=600&q=80", // apparel
-  "https://images.unsplash.com/photo-1530028828-25e8270793c5?w=600&q=80", // gloves/accessories
-  "https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=600&q=80",
-  "https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?w=600&q=80",
-  "https://images.unsplash.com/photo-1592919505780-303950717480?w=600&q=80",
-  "https://images.unsplash.com/photo-1535132011086-b8818f016104?w=600&q=80",
-  "https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=600&q=80",
-  "https://images.unsplash.com/photo-1622396481328-9b1b78cdd9fd?w=600&q=80",
-  "https://images.unsplash.com/photo-1552346154-21d32810aba3?w=600&q=80",
-  "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=600&q=80",
-  "https://images.unsplash.com/photo-1530028828-25e8270793c5?w=600&q=80",
-  "https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=600&q=80",
-  "https://images.unsplash.com/photo-1535132011086-b8818f016104?w=600&q=80",
-  "https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=600&q=80",
-  "https://images.unsplash.com/photo-1622396481328-9b1b78cdd9fd?w=600&q=80",
+// All panels are golf club imagery (drivers, irons, wedges, putters).
+// We repeat the six verified Unsplash club photos with varied crops
+// so every panel reads as a club, not shoes/apparel/accessories.
+const CLUB_PHOTOS = [
+  "photo-1535131749006-b7f58c99034b", // driver head
+  "photo-1587174486073-ae5e5cff23aa", // iron set
+  "photo-1622396481328-9b1b78cdd9fd", // wedge
+  "photo-1593111774240-d529f12cf4bb", // putter / club
+  "photo-1592919505780-303950717480", // club at address
+  "photo-1535132011086-b8818f016104", // bag full of clubs
 ];
+
+const CROPS = [
+  "fit=crop&crop=center",
+  "fit=crop&crop=entropy",
+  "fit=crop&crop=focalpoint&fp-x=0.5&fp-y=0.45",
+  "fit=crop&crop=focalpoint&fp-x=0.4&fp-y=0.55",
+];
+
+const PANEL_IMAGES = Array.from({ length: 22 }, (_, i) => {
+  const id = CLUB_PHOTOS[i % CLUB_PHOTOS.length];
+  const crop = CROPS[Math.floor(i / CLUB_PHOTOS.length) % CROPS.length];
+  return `https://images.unsplash.com/${id}?w=600&q=80&auto=format&${crop}`;
+});
 
 // Premium golf palette tints (deep green, graphite, sand) — replaces the rainbow gradients.
 const GRADIENT_OVERLAYS = [
