@@ -9,6 +9,11 @@ const TAG_LABEL: Record<ProductTag, string> = {
   "editor-pick": "Editor pick",
   new: "New",
   "best-seller": "Best seller",
+  "most-forgiving": "Most forgiving",
+  "low-spin": "Low spin",
+  "tour-inspired": "Tour inspired",
+  "best-for-beginners": "Best for beginners",
+  "game-improvement": "Game improvement",
 };
 
 const TAG_TONE: Record<ProductTag, string> = {
@@ -19,6 +24,11 @@ const TAG_TONE: Record<ProductTag, string> = {
   "editor-pick": "border-sand-warm/40 text-sand-warm bg-ink-800/60",
   new: "border-bone-200/20 text-bone-100 bg-ink-800/60",
   "best-seller": "border-bone-200/20 text-bone-200 bg-ink-800/60",
+  "most-forgiving": "border-fairway/40 text-fairway-light bg-fairway-dark/30",
+  "low-spin": "border-bone-200/20 text-bone-100 bg-ink-800/60",
+  "tour-inspired": "border-sand/40 text-sand bg-ink-800/60",
+  "best-for-beginners": "border-fairway/40 text-fairway-light bg-fairway-dark/30",
+  "game-improvement": "border-bone-200/20 text-bone-200 bg-ink-800/60",
 };
 
 export function ProductBadge({

@@ -3,19 +3,19 @@ import { Logo } from "@/components/Logo";
 
 const SHOP = [
   { label: "Drivers", href: "/category/drivers" },
-  { label: "Irons", href: "/category/irons" },
+  { label: "Fairway Woods", href: "/category/fairway-woods" },
+  { label: "Hybrids", href: "/category/hybrids" },
+  { label: "Utility Irons", href: "/category/utility-irons" },
+  { label: "Iron Sets", href: "/category/irons" },
   { label: "Wedges", href: "/category/wedges" },
   { label: "Putters", href: "/category/putters" },
-  { label: "Balls", href: "/category/golf-balls" },
-  { label: "Bags", href: "/category/bags" },
-  { label: "Shoes", href: "/category/shoes" },
 ];
 const DISCOVER = [
+  { label: "14-club quiz", href: "/quiz" },
+  { label: "Bag Builder", href: "/build-your-bag" },
   { label: "Deals", href: "/deals" },
   { label: "Brands", href: "/brands" },
   { label: "Buying guides", href: "/guides" },
-  { label: "Gifts", href: "/category/gifts" },
-  { label: "Simulators", href: "/category/simulators" },
 ];
 const COMPANY = [
   { label: "How it works", href: "/about" },
@@ -31,7 +31,7 @@ export function Footer() {
           <div className="max-w-sm">
             <Logo />
             <p className="mt-4 text-[13px] leading-relaxed text-bone-300">
-              Hardstick is a premium golf gear search engine. Compare clubs, balls, bags, and tech across trusted retailers, then click through to buy at the best price.
+              Hardstick is a premium golf club search engine. Search and compare drivers, woods, hybrids, irons, wedges, and putters across trusted retailers, then click through to buy at the best price.
             </p>
             <p className="mt-4 text-[12px] leading-relaxed text-bone-400">
               We may earn a commission when you click a partner link and buy. Prices and availability are provided by retailers and can change.

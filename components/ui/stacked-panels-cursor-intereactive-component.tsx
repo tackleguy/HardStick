@@ -9,16 +9,14 @@ const SCENE_SPRING = { stiffness: 80, damping: 22, mass: 1 };
 const Z_SPREAD = 42;
 const SIGMA = 2.8;
 
-// All panels are golf club imagery (drivers, irons, wedges, putters).
-// We repeat the six verified Unsplash club photos with varied crops
-// so every panel reads as a club, not shoes/apparel/accessories.
+// Verified Unsplash photos that show real golf clubs.
 const CLUB_PHOTOS = [
-  "photo-1535131749006-b7f58c99034b", // driver head
-  "photo-1587174486073-ae5e5cff23aa", // iron set
+  "photo-1535131749006-b7f58c99034b", // driver
+  "photo-1587174486073-ae5e5cff23aa", // irons
   "photo-1622396481328-9b1b78cdd9fd", // wedge
-  "photo-1593111774240-d529f12cf4bb", // putter / club
+  "photo-1593111774240-d529f12cf4bb", // putter
   "photo-1592919505780-303950717480", // club at address
-  "photo-1535132011086-b8818f016104", // bag full of clubs
+  "photo-1535132011086-b8818f016104", // bag of clubs
 ];
 
 const CROPS = [
@@ -28,36 +26,53 @@ const CROPS = [
   "fit=crop&crop=focalpoint&fp-x=0.4&fp-y=0.55",
 ];
 
-const PANEL_IMAGES = Array.from({ length: 22 }, (_, i) => {
+// Each panel is treated as a real catalog product card with a brand and model label.
+// We rotate through real brands and category models so the motion reads as
+// "browsing a club lineup" rather than abstract art.
+const CATALOG_ITEMS: { brand: string; model: string; category: string }[] = [
+  { brand: "TaylorMade", model: "Qi10",        category: "Driver" },
+  { brand: "Titleist",   model: "TSR3",        category: "Driver" },
+  { brand: "Callaway",   model: "Paradym Ai",  category: "Driver" },
+  { brand: "PING",       model: "G430 Max 10K",category: "Driver" },
+  { brand: "Cobra",      model: "Darkspeed LS",category: "Driver" },
+  { brand: "Srixon",     model: "ZX5 Mk II",   category: "Driver" },
+
+  { brand: "TaylorMade", model: "Qi10",        category: "Fairway" },
+  { brand: "PING",       model: "G430 Max",    category: "Fairway" },
+  { brand: "Callaway",   model: "Paradym MAX", category: "Fairway" },
+
+  { brand: "Titleist",   model: "TSR2",        category: "Hybrid" },
+  { brand: "PING",       model: "G430",        category: "Hybrid" },
+
+  { brand: "Mizuno",     model: "Pro 245",     category: "Irons" },
+  { brand: "TaylorMade", model: "P·790",       category: "Irons" },
+  { brand: "PING",       model: "i230",        category: "Irons" },
+  { brand: "Cleveland",  model: "HALO XL",     category: "Irons" },
+  { brand: "PXG",        model: "0317 ST",     category: "Irons" },
+
+  { brand: "Titleist",   model: "Vokey SM10",  category: "Wedge" },
+  { brand: "Cleveland",  model: "RTX 6 ZipCore", category: "Wedge" },
+  { brand: "PING",       model: "Glide 4.0",   category: "Wedge" },
+
+  { brand: "Scotty Cameron", model: "Newport 2", category: "Putter" },
+  { brand: "TaylorMade", model: "Spider Tour", category: "Putter" },
+  { brand: "Odyssey",    model: "Ai-ONE 7",    category: "Putter" },
+];
+
+const PANEL_IMAGES = Array.from({ length: PANEL_COUNT }, (_, i) => {
   const id = CLUB_PHOTOS[i % CLUB_PHOTOS.length];
   const crop = CROPS[Math.floor(i / CLUB_PHOTOS.length) % CROPS.length];
-  return `https://images.unsplash.com/${id}?w=600&q=80&auto=format&${crop}`;
+  return `https://images.unsplash.com/${id}?w=600&q=85&auto=format&${crop}`;
 });
 
-// Premium golf palette tints (deep green, graphite, sand) — replaces the rainbow gradients.
+// Premium golf palette tints (deep green, graphite, sand) — the panels should
+// read as moody catalog cards, not rainbow art.
 const GRADIENT_OVERLAYS = [
-  "linear-gradient(135deg, rgba(39,55,42,0.65) 0%, rgba(12,14,16,0.60) 100%)",
-  "linear-gradient(135deg, rgba(62,85,56,0.55) 0%, rgba(8,9,11,0.65) 100%)",
-  "linear-gradient(135deg, rgba(166,137,95,0.40) 0%, rgba(12,14,16,0.65) 100%)",
-  "linear-gradient(135deg, rgba(109,139,93,0.45) 0%, rgba(21,24,28,0.60) 100%)",
-  "linear-gradient(135deg, rgba(212,184,150,0.30) 0%, rgba(12,14,16,0.70) 100%)",
-  "linear-gradient(135deg, rgba(39,55,42,0.55) 0%, rgba(21,24,28,0.65) 100%)",
-  "linear-gradient(135deg, rgba(53,59,68,0.55) 0%, rgba(12,14,16,0.65) 100%)",
-  "linear-gradient(135deg, rgba(62,85,56,0.50) 0%, rgba(166,137,95,0.30) 100%)",
-  "linear-gradient(135deg, rgba(184,58,46,0.30) 0%, rgba(12,14,16,0.70) 100%)",
-  "linear-gradient(135deg, rgba(109,139,93,0.40) 0%, rgba(8,9,11,0.65) 100%)",
-  "linear-gradient(135deg, rgba(212,184,150,0.25) 0%, rgba(39,55,42,0.55) 100%)",
-  "linear-gradient(135deg, rgba(39,55,42,0.65) 0%, rgba(53,59,68,0.55) 100%)",
-  "linear-gradient(135deg, rgba(62,85,56,0.45) 0%, rgba(8,9,11,0.65) 100%)",
-  "linear-gradient(135deg, rgba(166,137,95,0.40) 0%, rgba(21,24,28,0.65) 100%)",
-  "linear-gradient(135deg, rgba(109,139,93,0.50) 0%, rgba(12,14,16,0.65) 100%)",
-  "linear-gradient(135deg, rgba(53,59,68,0.50) 0%, rgba(62,85,56,0.45) 100%)",
-  "linear-gradient(135deg, rgba(212,184,150,0.30) 0%, rgba(39,55,42,0.55) 100%)",
-  "linear-gradient(135deg, rgba(184,58,46,0.25) 0%, rgba(12,14,16,0.70) 100%)",
-  "linear-gradient(135deg, rgba(62,85,56,0.55) 0%, rgba(8,9,11,0.65) 100%)",
-  "linear-gradient(135deg, rgba(39,55,42,0.55) 0%, rgba(166,137,95,0.30) 100%)",
-  "linear-gradient(135deg, rgba(109,139,93,0.45) 0%, rgba(184,58,46,0.20) 100%)",
-  "linear-gradient(135deg, rgba(53,59,68,0.55) 0%, rgba(212,184,150,0.25) 100%)",
+  "linear-gradient(160deg, rgba(39,55,42,0.62) 0%, rgba(8,9,11,0.78) 100%)",
+  "linear-gradient(160deg, rgba(62,85,56,0.55) 0%, rgba(12,14,16,0.78) 100%)",
+  "linear-gradient(160deg, rgba(166,137,95,0.40) 0%, rgba(12,14,16,0.80) 100%)",
+  "linear-gradient(160deg, rgba(109,139,93,0.45) 0%, rgba(21,24,28,0.78) 100%)",
+  "linear-gradient(160deg, rgba(53,59,68,0.55) 0%, rgba(12,14,16,0.80) 100%)",
 ];
 
 function Panel({
@@ -77,9 +92,10 @@ function Panel({
   const w = 200 + t * 80;
   const h = 280 + t * 120;
 
-  const opacity = 0.25 + t * 0.75;
+  const opacity = 0.30 + t * 0.70;
   const imageUrl = PANEL_IMAGES[index % PANEL_IMAGES.length];
   const gradient = GRADIENT_OVERLAYS[index % GRADIENT_OVERLAYS.length];
+  const item = CATALOG_ITEMS[index % CATALOG_ITEMS.length];
 
   return (
     <motion.div
@@ -118,18 +134,69 @@ function Panel({
           position: "absolute",
           inset: 0,
           background:
-            "linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.45) 100%)",
+            "linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.55) 100%)",
         }}
       />
+
+      {/* Catalog card frame */}
       <div
         style={{
           position: "absolute",
           inset: 0,
           borderRadius: "inherit",
-          border: `1px solid rgba(214, 205, 185, ${0.06 + t * 0.18})`,
+          border: `1px solid rgba(214, 205, 185, ${0.10 + t * 0.18})`,
           boxSizing: "border-box",
         }}
       />
+
+      {/* Catalog card content */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          padding: "12px 14px",
+          color: "#F6F3EA",
+        }}
+      >
+        <div
+          style={{
+            fontSize: "9.5px",
+            letterSpacing: "0.18em",
+            textTransform: "uppercase",
+            color: "rgba(216,210,190,0.82)",
+            fontFamily: "var(--font-mono), ui-monospace, monospace",
+          }}
+        >
+          {item.category}
+        </div>
+        <div>
+          <div
+            style={{
+              fontSize: "10px",
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: "rgba(216,210,190,0.70)",
+              fontFamily: "var(--font-mono), ui-monospace, monospace",
+            }}
+          >
+            {item.brand}
+          </div>
+          <div
+            style={{
+              fontSize: "13.5px",
+              fontWeight: 500,
+              letterSpacing: "-0.01em",
+              marginTop: 2,
+              lineHeight: 1.15,
+            }}
+          >
+            {item.model}
+          </div>
+        </div>
+      </div>
     </motion.div>
   );
 }

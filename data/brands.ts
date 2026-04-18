@@ -4,7 +4,7 @@ export const BRANDS: Brand[] = [
   {
     slug: "titleist",
     name: "Titleist",
-    blurb: "Tour-proven craftsmanship across clubs, balls, and gear.",
+    blurb: "Tour-proven craftsmanship across drivers, irons, wedges, and putters.",
     heritage: "Since 1932 · Fairhaven, MA",
     accent: "#C0111F",
   },
@@ -13,7 +13,7 @@ export const BRANDS: Brand[] = [
     name: "TaylorMade",
     blurb: "Metalwoods innovation and speed-first iron design.",
     heritage: "Since 1979 · Carlsbad, CA",
-    accent: "#FFFFFF",
+    accent: "#F2F2F2",
   },
   {
     slug: "callaway",
@@ -25,9 +25,16 @@ export const BRANDS: Brand[] = [
   {
     slug: "ping",
     name: "PING",
-    blurb: "Engineering-first with a custom-fit philosophy.",
+    blurb: "Engineering-first clubs with a custom-fit philosophy.",
     heritage: "Since 1959 · Phoenix, AZ",
-    accent: "#6D8B5D",
+    accent: "#A6BE92",
+  },
+  {
+    slug: "cobra",
+    name: "Cobra",
+    blurb: "Speed-forward design with a strong game-improvement lineup.",
+    heritage: "Since 1973 · Carlsbad, CA",
+    accent: "#F5A300",
   },
   {
     slug: "mizuno",
@@ -37,6 +44,20 @@ export const BRANDS: Brand[] = [
     accent: "#1E63A5",
   },
   {
+    slug: "srixon",
+    name: "Srixon",
+    blurb: "Forged irons, tour balls, and a no-nonsense player ethos.",
+    heritage: "Since 1930 · Hyogo, JP",
+    accent: "#E5232C",
+  },
+  {
+    slug: "cleveland",
+    name: "Cleveland",
+    blurb: "Wedges and short-game tools trusted at every level.",
+    heritage: "Since 1979 · Huntington Beach, CA",
+    accent: "#F08A1E",
+  },
+  {
     slug: "scotty-cameron",
     name: "Scotty Cameron",
     blurb: "Milled putters with tour-studio soul and iconic shapes.",
@@ -44,18 +65,25 @@ export const BRANDS: Brand[] = [
     accent: "#B83A2E",
   },
   {
-    slug: "footjoy",
-    name: "FootJoy",
-    blurb: "Category-defining golf shoes and glove leathers.",
-    heritage: "Since 1857 · Fairhaven, MA",
-    accent: "#3E5538",
+    slug: "pxg",
+    name: "PXG",
+    blurb: "Premium engineering, fully customized, no-compromise pricing.",
+    heritage: "Since 2014 · Scottsdale, AZ",
+    accent: "#9DA0A2",
   },
   {
-    slug: "bushnell",
-    name: "Bushnell",
-    blurb: "Laser rangefinder standard-bearers with tour-used optics.",
-    heritage: "Since 1948 · Overland Park, KS",
-    accent: "#F08A1E",
+    slug: "wilson",
+    name: "Wilson",
+    blurb: "American heritage at honest prices — Staff and value lines.",
+    heritage: "Since 1914 · Chicago, IL",
+    accent: "#D11212",
+  },
+  {
+    slug: "xxio",
+    name: "XXIO",
+    blurb: "Lightweight, easy-launching clubs built for moderate swing speeds.",
+    heritage: "Since 2000 · Hyogo, JP",
+    accent: "#0F2F6B",
   },
 ];
 

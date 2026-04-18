@@ -2,18 +2,17 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, X, Search } from "lucide-react";
+import { Menu, X, Search, Sparkles } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { SearchInput } from "@/components/SearchInput";
 import { cn } from "@/lib/utils";
 
 const NAV = [
   { label: "Drivers", href: "/category/drivers" },
+  { label: "Woods", href: "/category/fairway-woods" },
   { label: "Irons", href: "/category/irons" },
+  { label: "Wedges", href: "/category/wedges" },
   { label: "Putters", href: "/category/putters" },
-  { label: "Balls", href: "/category/golf-balls" },
-  { label: "Tech", href: "/category/rangefinders" },
-  { label: "Deals", href: "/deals" },
   { label: "Brands", href: "/brands" },
   { label: "Guides", href: "/guides" },
 ];
@@ -39,8 +38,15 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="ml-auto hidden items-center gap-2 md:flex md:w-[320px] lg:w-[420px]">
+        <div className="ml-auto hidden items-center gap-3 md:flex md:w-[360px] lg:w-[480px]">
           <SearchInput size="md" />
+          <Link
+            href="/quiz"
+            className="hidden shrink-0 items-center gap-1.5 rounded-full border border-sand/40 bg-sand/10 px-3.5 py-2 text-[12.5px] font-medium text-sand-warm transition-colors hover:border-sand/70 hover:text-bone-50 lg:inline-flex"
+          >
+            <Sparkles className="h-3.5 w-3.5" />
+            Take the quiz
+          </Link>
         </div>
 
         <div className="ml-auto flex items-center gap-2 md:hidden">
@@ -74,6 +80,21 @@ export function Header() {
         )}
       >
         <nav className="flex flex-col px-6 py-4">
+          <Link
+            href="/quiz"
+            onClick={() => setMobileOpen(false)}
+            className="mb-2 flex items-center justify-between rounded-full border border-sand/40 bg-sand/10 px-4 py-2.5 text-[14px] font-medium text-sand-warm"
+          >
+            <span className="inline-flex items-center gap-2"><Sparkles className="h-4 w-4" /> Take the 14-club quiz</span>
+            <span aria-hidden>→</span>
+          </Link>
+          <Link
+            href="/build-your-bag"
+            onClick={() => setMobileOpen(false)}
+            className="mb-2 rounded-full border border-bone-200/15 bg-ink-800/60 px-4 py-2.5 text-[14px] text-bone-100"
+          >
+            Build your bag
+          </Link>
           {NAV.map((item) => (
             <Link
               key={item.href}

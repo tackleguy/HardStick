@@ -2,16 +2,10 @@ export type CategorySlug =
   | "drivers"
   | "fairway-woods"
   | "hybrids"
+  | "utility-irons"
   | "irons"
   | "wedges"
-  | "putters"
-  | "golf-balls"
-  | "bags"
-  | "shoes"
-  | "apparel"
-  | "rangefinders"
-  | "simulators"
-  | "gifts";
+  | "putters";
 
 export type SkillLevel = "beginner" | "improver" | "intermediate" | "advanced" | "tour";
 
@@ -22,7 +16,17 @@ export type ProductTag =
   | "on-sale"
   | "editor-pick"
   | "new"
-  | "best-seller";
+  | "best-seller"
+  | "most-forgiving"
+  | "low-spin"
+  | "tour-inspired"
+  | "best-for-beginners"
+  | "game-improvement";
+
+export type LaunchProfile = "low" | "mid" | "high";
+export type SpinProfile = "low" | "mid" | "high";
+export type ForgivenessTier = 1 | 2 | 3 | 4 | 5;
+export type SwingSpeedTier = "slow" | "moderate" | "fast" | "tour";
 
 export interface Category {
   slug: CategorySlug;
@@ -31,6 +35,7 @@ export interface Category {
   heroCopy: string;
   image: string;
   count: number;
+  bagSlots: number;
 }
 
 export interface Brand {
@@ -85,6 +90,15 @@ export interface Product {
   idealFor: string;
   rating: number;
   reviewCount: number;
+  // Club-specific recommendation fields
+  forgivenessRating: ForgivenessTier;
+  launchProfile: LaunchProfile;
+  spinProfile: SpinProfile;
+  swingSpeedFit: SwingSpeedTier[];
+  workability: 1 | 2 | 3 | 4 | 5;
+  // Iron-set / wedge sub-properties
+  setComposition?: string;
+  loftDeg?: number;
 }
 
 export interface EditorialGuide {
@@ -97,4 +111,66 @@ export interface EditorialGuide {
   relatedCategories: CategorySlug[];
   featuredProductIds: string[];
   body: { heading: string; text: string }[];
+}
+
+// =====================================================================
+// Quiz + recommendation engine types
+// =====================================================================
+
+export type BudgetTier = "value" | "balanced" | "premium" | "no-cap";
+export type Priority = "forgiveness" | "balanced" | "workability";
+export type BagPreference = "one-brand" | "mixed";
+export type BuyerIntent = "first-set" | "upgrade" | "specific-clubs";
+export type PlayFrequency = "weekly" | "monthly" | "casual";
+export type Struggle = "distance" | "consistency" | "slice" | "launch" | "short-game" | "putting";
+
+export interface QuizOption {
+  value: string;
+  label: string;
+  description?: string;
+}
+
+export interface QuizQuestion {
+  id: string;
+  prompt: string;
+  helper?: string;
+  type: "single" | "multi";
+  options: QuizOption[];
+  conditional?: (answers: QuizAnswers) => boolean;
+}
+
+export type QuizAnswerValue = string | string[];
+export type QuizAnswers = Record<string, QuizAnswerValue>;
+
+export interface GolferProfile {
+  archetype: SkillLevel;
+  swingSpeed: SwingSpeedTier;
+  budget: BudgetTier;
+  priority: Priority;
+  bagPref: BagPreference;
+  struggles: Struggle[];
+  intent: BuyerIntent;
+  frequency: PlayFrequency;
+  handicap?: number;
+  label: string; // human-friendly profile name
+  summary: string; // 1-2 sentence rationale
+}
+
+export interface ClubRecommendation {
+  productId: string;
+  category: CategorySlug;
+  bagSlotLabel: string; // e.g. "3-Wood", "Pitching Wedge", "Putter"
+  rationale: string;
+  score: number;
+}
+
+export interface SetRecommendation {
+  profile: GolferProfile;
+  composition: ClubRecommendation[];
+  totalEstimatedPrice: number;
+  alternates: {
+    "best-value": ClubRecommendation[];
+    "most-forgiving": ClubRecommendation[];
+    "premium-upgrade": ClubRecommendation[];
+  };
 }
